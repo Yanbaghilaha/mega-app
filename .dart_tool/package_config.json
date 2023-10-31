@@ -92,6 +92,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "gap",
+      "rootUri": "file:///Users/yanbaghilaha/.pub-cache/hosted/pub.dev/gap-3.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "google_fonts",
       "rootUri": "file:///Users/yanbaghilaha/.pub-cache/hosted/pub.dev/google_fonts-6.1.0",
       "packageUri": "lib/",
@@ -320,7 +326,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-10-28T07:49:41.540355Z",
+  "generated": "2023-10-31T06:51:52.882522Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

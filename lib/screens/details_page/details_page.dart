@@ -62,28 +62,29 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-            child: Text(
-              widget.title,
-              style: GoogleFonts.dmSans(
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-                letterSpacing: 0.2,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+              child: Text(
+                widget.title,
+                style: GoogleFonts.dmSans(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.2,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          const SearchBarWidget(),
+            const SizedBox(
+              height: 20,
+            ),
+            const SearchBarWidget(),
 
-          //Card widget
-          Expanded(
-            child: GridView.builder(
+            //Card widget
+            GridView.builder(
+              shrinkWrap: true,
               padding: const EdgeInsets.only(
                 left: 25,
                 right: 25,
@@ -91,18 +92,28 @@ class _DetailsPageState extends State<DetailsPage> {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 mainAxisSpacing: 21,
-                crossAxisSpacing: 40,
+                mainAxisExtent: 240,
+                crossAxisSpacing: 13,
               ),
               itemCount: detailsProduct.length,
               itemBuilder: (context, index) {
                 Product product = detailsProduct[index];
-                return ProductItemWidget(
-                  productItem: product,
+                return Container(
+                  decoration: BoxDecoration(
+                    color: blueOcean,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Column(
+                    children: [
+                      Text(product.nameProduct),
+                    ],
+                  ),
                 );
+                // return ProductItemWidget(productItem: product);
               },
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
