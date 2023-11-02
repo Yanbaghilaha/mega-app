@@ -7,6 +7,7 @@ import 'package:e_commerce/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:iconly/iconly.dart';
 
 class DetailsPage extends StatefulWidget {
   final String title;
@@ -29,91 +30,227 @@ class _DetailsPageState extends State<DetailsPage> {
         elevation: 0,
         toolbarHeight: 99,
         title: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Row(
+              Row(
                 children: [
-                  Icon(null),
-                  SizedBox(
-                    width: 20,
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Icon(IconlyLight.arrow_left_2, color: navyBlack),
                   ),
-                  Icon(null),
                 ],
               ),
               Text(
                 "Details Product",
                 style: GoogleFonts.dmSans(
-                  fontWeight: FontWeight.w700,
-                  color: blueOcean,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                  color: navyBlack,
                 ),
               ),
-              Row(
+              Stack(
+                alignment: Alignment.topRight,
                 children: [
-                  SvgPicture.asset("assets/icons/bell.svg"),
-                  const SizedBox(
-                    width: 20,
-                  ),
                   SvgPicture.asset("assets/icons/shoping-cart.svg"),
+                  Container(
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: redVelvet,
+                    ),
+                  ),
                 ],
               ),
             ],
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
-              child: Text(
-                widget.title,
-                style: GoogleFonts.dmSans(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  letterSpacing: 0.2,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(25, 30, 25, 0),
+                  child: Text(
+                    widget.title,
+                    style: GoogleFonts.dmSans(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.2,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const SearchBarWidget(),
+
+                //Card widget
+                GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding:
+                      const EdgeInsets.only(left: 25, right: 25, bottom: 120),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 21,
+                    mainAxisExtent: 240,
+                    crossAxisSpacing: 13,
+                  ),
+                  itemCount: detailsProduct.length,
+                  itemBuilder: (context, index) {
+                    Product product = detailsProduct[index];
+                    return Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 10),
+                      decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 3,
+                            color: Colors.black.withOpacity(0.05),
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                        color: pureWhite,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Column(
+                        children: [
+                          Image.asset("assets/products/${product.image}.png"),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          //Title
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                product.nameProduct,
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.2,
+                                  color: navyBlack,
+                                ),
+                              ),
+
+                              //Price
+                              Text(
+                                CurrencyIDR.convertToIdr(product.price, 0),
+                                style: GoogleFonts.dmSans(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 0.2,
+                                  color: redVelvet,
+                                ),
+                              ),
+
+                              const SizedBox(
+                                height: 10.5,
+                              ),
+
+                              //Rating & Review
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      //Rating
+                                      SvgPicture.asset(
+                                        "assets/icons/star.svg",
+                                        width: 11,
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        product.rating.toString(),
+                                        style: GoogleFonts.dmSans(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 10,
+                                          letterSpacing: 0.2,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+
+                                      //Review
+                                      Text(
+                                        "${product.review.toInt()} Reviews",
+                                        style: GoogleFonts.dmSans(
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 10,
+                                          letterSpacing: 0.2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+
+                                  //dots Icon
+
+                                  SvgPicture.asset(
+                                      "assets/icons/menu-dots-vertical.svg")
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                    // return ProductItemWidget(productItem: product);
+                  },
+                ),
+              ],
+            ),
+          ),
+          //Filter Sortir
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 25),
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    print("hello");
+                  });
+                },
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 20,
+                  ),
+                  decoration: BoxDecoration(
+                    color: pureWhite,
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: navyBlack,
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    "Filter & Sortir",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.dmSans(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: navyBlack,
+                    ),
+                  ),
                 ),
               ),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            const SearchBarWidget(),
-
-            //Card widget
-            GridView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.only(
-                left: 25,
-                right: 25,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 21,
-                mainAxisExtent: 240,
-                crossAxisSpacing: 13,
-              ),
-              itemCount: detailsProduct.length,
-              itemBuilder: (context, index) {
-                Product product = detailsProduct[index];
-                return Container(
-                  decoration: BoxDecoration(
-                    color: blueOcean,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    children: [
-                      Text(product.nameProduct),
-                    ],
-                  ),
-                );
-                // return ProductItemWidget(productItem: product);
-              },
-            ),
-          ],
-        ),
+          )
+        ],
       ),
     );
   }

@@ -30,7 +30,6 @@ class ProductItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // width: 156,
       margin: const EdgeInsets.only(right: 15),
       padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
       decoration: BoxDecoration(
@@ -41,7 +40,7 @@ class ProductItemWidget extends StatelessWidget {
             offset: const Offset(0, 1),
           ),
         ],
-        color: navyBlack,
+        color: pureWhite,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
