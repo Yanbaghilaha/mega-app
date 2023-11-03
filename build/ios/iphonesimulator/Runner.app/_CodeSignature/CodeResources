@@ -46,7 +46,7 @@
 		</data>
 		<key>Frameworks/App.framework/App</key>
 		<data>
-		5NYtr6aJXbp9azdt+/xsgNmSevc=
+		UKZzV3PujC0/xPagGkNT6fBJ9Bc=
 		</data>
 		<key>Frameworks/App.framework/Info.plist</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Frameworks/App.framework/_CodeSignature/CodeResources</key>
 		<data>
-		DhkxO4eBJFA2vV5FDrtUyhkvSAw=
+		l/c7G5w0JTOTAx3SSvLnGAX/1jw=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
 		<data>
@@ -174,7 +174,7 @@
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/kernel_blob.bin</key>
 		<data>
-		8nhjEm56FQSE7An8ZY/vXe7ztM0=
+		T+LuMZv4N+LKoU7wbTk72Vrbb2c=
 		</data>
 		<key>Frameworks/App.framework/flutter_assets/packages/flutter_phosphor_icons/fonts/Phosphor.ttf</key>
 		<data>
@@ -381,7 +381,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			MNVMmr01ns2HM3lrYYp5n3zOvS+4RvXX0by3DbD+LRg=
+			mhw+3maaXyo0Gfpg8f+cY8Yp7YOEe5S/4FCyBigUJvA=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/Info.plist</key>
@@ -395,7 +395,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			kaILP0XK1JYoi+mbMpesqB+UqSJFzYSjGUkwKiTXRrw=
+			Hd0MEcKqF1EDbiScixrtyAwCIx0+Nz5KYOOFC26kJ/A=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/AssetManifest.bin</key>
@@ -605,7 +605,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zbVUUUfm0eW/jR2BH4CPIg/KERMNzEeF8BNoNuC8VVA=
+			VBpVT98FvtInO3fC9cjfaigSZrXOkrtBCjsVUL+vyjI=
 			</data>
 		</dict>
 		<key>Frameworks/App.framework/flutter_assets/packages/flutter_phosphor_icons/fonts/Phosphor.ttf</key>
