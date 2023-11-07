@@ -1,4 +1,6 @@
-import 'package:e_commerce/screens/login_page/login.dart';
+import 'package:e_commerce/screens/details_page/details_product.dart';
+import 'package:e_commerce/screens/home_page.dart';
+import 'package:e_commerce/screens/seller_page/info_seller.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Login(),
+      home: HomePage(),
     );
   }
 }

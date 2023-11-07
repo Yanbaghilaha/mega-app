@@ -6,7 +6,7 @@ import 'package:e_commerce/datas/categories.dart';
 import 'package:e_commerce/datas/latest_news.dart';
 import 'package:e_commerce/datas/product.dart';
 import 'package:e_commerce/models/latest_news.dart';
-import 'package:e_commerce/screens/details_page/details_page.dart';
+import 'package:e_commerce/screens/details_page/category_page.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/screens/extract/search_bar.dart';
 import 'package:e_commerce/screens/extract/title_bar.dart';
@@ -212,8 +212,9 @@ class _HomePageState extends State<HomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              DetailsPage(title: categoriesMenu[index].title),
+                          builder: (context) => CategoryPage(
+                            title: categoriesMenu[index].title,
+                          ),
                         ),
                       );
                     },

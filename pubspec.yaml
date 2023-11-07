@@ -72,6 +72,9 @@ flutter:
     - assets/banner/
     - assets/products/
     - assets/images/
+    - assets/user/
+    - assets/avatar/
+    - assets/courier/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

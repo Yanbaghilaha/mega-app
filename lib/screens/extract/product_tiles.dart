@@ -48,7 +48,10 @@ class ProductItemWidget extends StatelessWidget {
           Stack(
             alignment: Alignment.bottomLeft,
             children: [
-              Image.asset("assets/products/${productItem.image}.png"),
+              Image.asset(
+                "assets/products/${productItem.image}.png",
+                width: 130,
+              ),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: sale
