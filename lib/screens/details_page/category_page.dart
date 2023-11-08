@@ -3,11 +3,13 @@ import 'package:e_commerce/datas/details_product.dart';
 import 'package:e_commerce/models/featured_product.dart';
 import 'package:e_commerce/screens/details_page/details_product.dart';
 import 'package:e_commerce/screens/extract/my_app_bar.dart';
+import 'package:e_commerce/screens/extract/pop_over.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/screens/extract/search_bar.dart';
 import 'package:e_commerce/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryPage extends StatefulWidget {
@@ -21,7 +23,20 @@ class CategoryPage extends StatefulWidget {
   State<CategoryPage> createState() => _CategoryPageState();
 }
 
+class SortirList {
+  final String title;
+  bool isActive;
+
+  SortirList({required this.title, this.isActive = false});
+}
+
 class _CategoryPageState extends State<CategoryPage> {
+  List<SortirList> sortir = [
+    SortirList(title: "Name (A-Z)", isActive: true),
+    SortirList(title: "Name (Z-A)", isActive: false),
+    SortirList(title: "Price (High - Low)", isActive: false),
+    SortirList(title: "Price (Low - High)", isActive: false),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -195,8 +210,117 @@ class _CategoryPageState extends State<CategoryPage> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextButton(
                 onPressed: () {
-                  setState(() {
-                    print("hello");
+                  setState(() async {
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      backgroundColor: Colors.transparent,
+                      context: context,
+                      builder: (context) {
+                        return Popover(
+                          content: Padding(
+                            padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
+                            child: Column(
+                              children: [
+                                ListView.separated(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemBuilder: (context, index) {
+                                    final item = sortir[index];
+                                    return InkWell(
+                                      onTap: () {
+                                        setState(() {
+                                          item.isActive = !item.isActive;
+                                        });
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                sortir[index].title,
+                                                style: GoogleFonts.dmSans(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                              if (item.isActive)
+                                                SvgPicture.asset(
+                                                    "assets/icons/check.svg"),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                  separatorBuilder: (context, index) =>
+                                      const LineGap(),
+                                  itemCount: sortir.length,
+                                ),
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: navyBlack,
+                                            width: 1,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            10,
+                                          ),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
+                                          horizontal: 16,
+                                        ),
+                                        child: Center(
+                                          child: Text(
+                                            "Reset",
+                                            style: GoogleFonts.dmSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: navyBlack,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const Gap(15),
+                                    Expanded(
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: blueOcean,
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                          vertical: 20,
+                                          horizontal: 16,
+                                        ),
+                                        child: Center(
+                                            child: Text(
+                                          "Apply",
+                                          style: GoogleFonts.dmSans(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w400,
+                                            color: pureWhite,
+                                          ),
+                                        )),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          title: "Sortir",
+                        );
+                      },
+                    );
                   });
                 },
                 child: Container(

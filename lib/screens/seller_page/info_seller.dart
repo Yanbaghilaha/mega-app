@@ -2,6 +2,7 @@ import 'package:e_commerce/datas/details_product.dart';
 import 'package:e_commerce/models/featured_product.dart';
 import 'package:e_commerce/screens/details_page/details_product.dart';
 import 'package:e_commerce/screens/extract/my_app_bar.dart';
+import 'package:e_commerce/screens/extract/pop_over.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/theme/colors.dart';
 import 'package:flutter/material.dart';
@@ -182,7 +183,53 @@ class _InfoSellerState extends State<InfoSeller> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30)),
                   builder: (context) {
-                    return const Popover();
+                    return Popover(
+                      title: "Dukungan Pengiriman",
+                      content: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(25, 20, 20, 0),
+                            child: Row(
+                              children: [
+                                SizedBox(
+                                  width: 80,
+                                  child: Image.asset(
+                                      "assets/courier/${courier[index].image}.png"),
+                                ),
+                                const Gap(10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      courier[index].title,
+                                      style: GoogleFonts.dmSans(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    const Gap(10),
+                                    Text(
+                                      courier[index].description,
+                                      style: GoogleFonts.dmSans(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400,
+                                        color: darkGrey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return const LineGap();
+                        },
+                        itemCount: courier.length,
+                      ),
+                    );
                   },
                 );
               },
@@ -353,72 +400,3 @@ List<Courier> courier = [
   Courier(title: "J&T", image: "j&t", description: "Reguler, Express"),
   Courier(title: "JNE", image: "jne", description: "REG, YES"),
 ];
-
-class Popover extends StatelessWidget {
-  const Popover({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.all(25),
-      decoration: BoxDecoration(
-        color: pureWhite,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Wrap(
-        children: [
-          Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 1, color: softGrey),
-                  ),
-                ),
-                padding: const EdgeInsets.all(25),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Dukungan Pengiriman",
-                      style: GoogleFonts.dmSans(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        PhosphorIcons.x,
-                        size: 24,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-
-              //Item Shipping
-              ListView.separated(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  return Row(
-                    children: [
-                      Image.asset("assets/courier/${courier[index].image}.png"),
-                    ],
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return const LineGap();
-                },
-                itemCount: courier.length,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
