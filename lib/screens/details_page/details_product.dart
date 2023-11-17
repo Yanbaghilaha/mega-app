@@ -1,12 +1,19 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// import 'dart:ffi';
+
 import 'package:e_commerce/datas/product.dart';
 import 'package:e_commerce/datas/review.dart';
 import 'package:e_commerce/models/featured_product.dart';
+import 'package:e_commerce/screens/extract/line_gap.dart';
 import 'package:e_commerce/screens/extract/my_app_bar.dart';
+import 'package:e_commerce/screens/extract/pop_over.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/screens/extract/title_bar.dart';
+import 'package:e_commerce/screens/review_product/review_product.dart';
 import 'package:e_commerce/screens/seller_page/info_seller.dart';
 import 'package:e_commerce/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,9 +42,61 @@ class ProductNavBar {
   });
 }
 
-class _DetailsProductState extends State<DetailsProduct> {
+class CustomSliderThumbCircle extends SliderComponentShape {
+  final double thumbRadius;
+  final double innerCircleRadius;
+
+  CustomSliderThumbCircle({
+    required this.thumbRadius,
+    required this.innerCircleRadius,
+  });
+
+  @override
+  Size getPreferredSize(bool isEnabled, bool isDiscrete) {
+    return Size.fromRadius(thumbRadius);
+  }
+
+  @override
+  void paint(
+    PaintingContext context,
+    Offset center, {
+    required Animation<double> activationAnimation,
+    required Animation<double> enableAnimation,
+    required bool isDiscrete,
+    required TextPainter labelPainter,
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required TextDirection textDirection,
+    required double value,
+    required double textScaleFactor,
+    required Size sizeWithOverflow,
+  }) {
+    final Canvas canvas = context.canvas;
+
+    final Tween<double> radiusTween = Tween<double>(
+      begin: innerCircleRadius,
+      end: thumbRadius,
+    );
+
+    final Paint paint = Paint()
+      ..color = redVelvet
+      ..style = PaintingStyle.fill;
+
+    // Draw outer circle
+    canvas.drawCircle(center, radiusTween.evaluate(activationAnimation), paint);
+
+    // Draw inner circle
+    paint.color = redVelvet;
+    canvas.drawCircle(center, innerCircleRadius, paint);
+  }
+}
+
+class _DetailsProductState extends State<DetailsProduct>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
+    int maxReview = 3;
+
     return Scaffold(
       appBar: const MyAppBar(
         title: "Details Product",
@@ -161,7 +220,7 @@ class _DetailsProductState extends State<DetailsProduct> {
                 ),
 
                 const LineGap(),
-                //Store Name
+
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 0, horizontal: 25),
@@ -231,6 +290,8 @@ class _DetailsProductState extends State<DetailsProduct> {
                     ),
                   ),
                 ),
+
+                //Store Name
 
                 const LineGap(),
 
@@ -303,79 +364,83 @@ class _DetailsProductState extends State<DetailsProduct> {
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
-                          final currentReview = review[index];
-                          return Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    "assets/avatar/${review[index].avatar}.png"),
-                              ),
-                              const Gap(15),
-                              Expanded(
-                                child: SizedBox(
-                                  width: double.infinity,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            review[index].name,
-                                            style: GoogleFonts.dmSans(
-                                              letterSpacing: 0.2,
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                          Text(
-                                            review[index].date,
-                                            style: GoogleFonts.dmSans(
-                                              color: darkGrey,
-                                              letterSpacing: 0.2,
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const Gap(5),
-                                      Row(
-                                        children: [
-                                          for (int i = 0; i < 5; i++)
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 2),
-                                              child: SvgPicture.asset(
-                                                i < currentReview.starCount
-                                                    ? "assets/icons/star-filled.svg"
-                                                    : "assets/icons/star-outlined.svg",
-                                                width: 16,
+                          if (index < maxReview) {
+                            final currentReview = review[index];
+                            return Row(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      "assets/avatar/${review[index].avatar}.png"),
+                                ),
+                                const Gap(15),
+                                Expanded(
+                                  child: SizedBox(
+                                    width: double.infinity,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              review[index].name,
+                                              style: GoogleFonts.dmSans(
+                                                letterSpacing: 0.2,
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 14,
                                               ),
                                             ),
-                                        ],
-                                      ),
-                                      const Gap(11),
-                                      Text(
-                                        review[index].description,
-                                        style: GoogleFonts.dmSans(
-                                          height: 2,
-                                          letterSpacing: .2,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400,
+                                            Text(
+                                              review[index].date,
+                                              style: GoogleFonts.dmSans(
+                                                color: darkGrey,
+                                                letterSpacing: 0.2,
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      )
-                                    ],
+                                        const Gap(5),
+                                        Row(
+                                          children: [
+                                            for (int i = 0; i < 5; i++)
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 2),
+                                                child: SvgPicture.asset(
+                                                  i < currentReview.starCount
+                                                      ? "assets/icons/star-filled.svg"
+                                                      : "assets/icons/star-outlined.svg",
+                                                  width: 16,
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                        const Gap(11),
+                                        Text(
+                                          review[index].description,
+                                          style: GoogleFonts.dmSans(
+                                            height: 2,
+                                            letterSpacing: .2,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          );
+                              ],
+                            );
+                          } else {
+                            return Container();
+                          }
                         },
                         itemCount: review.length,
                         separatorBuilder: (context, index) {
@@ -385,7 +450,13 @@ class _DetailsProductState extends State<DetailsProduct> {
 
                       //Button To Collapse
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ReviewProduct()),
+                          );
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                             vertical: 20,
@@ -410,7 +481,6 @@ class _DetailsProductState extends State<DetailsProduct> {
                           ),
                         ),
                       ),
-                      //Featured Product
                     ],
                   ),
                 ),
@@ -432,6 +502,7 @@ class _DetailsProductState extends State<DetailsProduct> {
               ],
             ),
           ),
+
           //navbar
           Align(
             alignment: Alignment.bottomCenter,
@@ -439,45 +510,119 @@ class _DetailsProductState extends State<DetailsProduct> {
               width: double.infinity,
               child: Container(
                 color: pureWhite,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 25,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 15,
-                            horizontal: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: redVelvet,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Added",
-                                style: GoogleFonts.dmSans(
-                                  color: pureWhite,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              Icon(
-                                IconlyBold.heart,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 25,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 15,
+                          horizontal: 20,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: redVelvet,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Added",
+                              style: GoogleFonts.dmSans(
                                 color: pureWhite,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
                               ),
-                            ],
-                          ),
+                            ),
+                            Icon(
+                              IconlyBold.heart,
+                              color: pureWhite,
+                            ),
+                          ],
                         ),
                       ),
-                      const Gap(19),
-                      Expanded(
+                    ),
+                    const Gap(19),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          showModalBottomSheet(
+                            context: context,
+                            isDismissible: true,
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) {
+                              return Popover(
+                                  // isUsingTabBar: true,
+                                  isHaveAdditionText: true,
+                                  content: Column(
+                                    children: [
+                                      Text(
+                                        "apalaha",
+                                        style: GoogleFonts.dmSans(
+                                          color: blueOcean,
+                                        ),
+                                      ),
+                                      Text(
+                                        "apalaha",
+                                        style: GoogleFonts.dmSans(
+                                          color: blueOcean,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  title: "Filter & Sorting");
+                              // return Container(
+
+                              //   padding: const EdgeInsets.all(25),
+                              //   margin: const EdgeInsets.all(25),
+                              //   color: pureWhite,
+                              //   child: Column(
+                              //     children: [
+                              //       TabBar(
+                              //         isScrollable: true,
+                              //         controller: tabController,
+                              //         tabs: [
+                              //           Tab(
+                              //             icon: Icon(
+                              //               IconlyBold.activity,
+                              //               color: navyBlack,
+                              //             ),
+                              //           ),
+                              //           Tab(
+                              //             icon: Icon(
+                              //               IconlyBold.arrow_down_2,
+                              //               color: navyBlack,
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //       Container(
+                              //         height: 20,
+                              //         color: blueOcean,
+                              //         child: TabBarView(
+                              //           controller: tabController,
+                              //           children: const [
+                              //             Text("1"),
+                              //             Text("2"),
+                              //           ],
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // );
+                              // // return Popover(
+                              // //   content: Container(),
+                              // //   title: "Filter & Sortir",
+                              // //   isHaveAdditionText: true,
+                              // // );
+                            },
+                          );
+                        },
                         child: Container(
                           padding: const EdgeInsets.symmetric(
                             vertical: 15,
@@ -502,8 +647,8 @@ class _DetailsProductState extends State<DetailsProduct> {
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -514,21 +659,62 @@ class _DetailsProductState extends State<DetailsProduct> {
   }
 }
 
-class LineGap extends StatelessWidget {
-  const LineGap({
-    super.key,
-  });
+class CustomCheckBox extends StatefulWidget {
+  const CustomCheckBox({
+    Key? key,
+    required this.padding,
+    this.color,
+    this.borderRadiusCheck = 8,
+    this.iconSize,
+    this.checkColor,
+    required this.onChanged,
+    this.iconColor,
+  }) : super(key: key);
+
+  final double padding;
+  final Color? color;
+  final double borderRadiusCheck;
+
+  final double? iconSize;
+  final Color? checkColor;
+  final Color? iconColor;
+  final Function(bool?) onChanged;
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 30,
-        horizontal: 25,
-      ),
+  State<CustomCheckBox> createState() => _CustomCheckBoxState();
+}
+
+class _CustomCheckBoxState extends State<CustomCheckBox> {
+  bool isChecked = false;
+  @override
+  Widget build(Object context) {
+    return InkWell(
+      onTap: () {
+        setState(() {
+          isChecked = !isChecked;
+          widget.onChanged.call(isChecked);
+        });
+      },
       child: Container(
-        color: softGrey,
-        height: 1,
+        padding: EdgeInsets.all(widget.padding),
+        decoration: BoxDecoration(
+          border: Border.all(
+            width: 1,
+            color: isChecked ? Colors.transparent : const Color(0xffC4C5C4),
+          ),
+          color: isChecked ? widget.color : Colors.transparent,
+          borderRadius: BorderRadius.circular(widget.borderRadiusCheck),
+        ),
+        child: isChecked
+            ? Icon(
+                PhosphorIcons.check_bold,
+                size: widget.iconSize,
+                color: pureWhite,
+              )
+            : Icon(
+                null,
+                size: widget.iconSize,
+              ),
       ),
     );
   }

@@ -80,6 +80,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "flutter_rating_bar",
+      "rootUri": "file:///Users/yanbaghilaha/.pub-cache/hosted/pub.dev/flutter_rating_bar-4.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "flutter_svg",
       "rootUri": "file:///Users/yanbaghilaha/.pub-cache/hosted/pub.dev/flutter_svg-2.0.7",
       "packageUri": "lib/",
@@ -326,7 +332,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2023-11-07T15:47:31.409129Z",
+  "generated": "2023-11-17T07:06:00.642727Z",
   "generator": "pub",
   "generatorVersion": "3.1.3"
 }

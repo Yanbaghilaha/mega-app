@@ -1,12 +1,11 @@
 import 'package:e_commerce/datas/details_product.dart';
 import 'package:e_commerce/models/featured_product.dart';
-import 'package:e_commerce/screens/details_page/details_product.dart';
+import 'package:e_commerce/screens/extract/line_gap.dart';
 import 'package:e_commerce/screens/extract/my_app_bar.dart';
 import 'package:e_commerce/screens/extract/pop_over.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/theme/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_phosphor_icons/flutter_phosphor_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';

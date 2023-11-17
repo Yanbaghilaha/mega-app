@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:e_commerce/screens/extract/line_gap.dart';
 
 class CategoryPage extends StatefulWidget {
   final String title;
@@ -37,6 +38,13 @@ class _CategoryPageState extends State<CategoryPage> {
     SortirList(title: "Price (High - Low)", isActive: false),
     SortirList(title: "Price (Low - High)", isActive: false),
   ];
+
+  void setActiveItem(int index) {
+    for (int i = 0; i < sortir.length; i++) {
+      sortir[i].isActive = (i == index);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -210,118 +218,123 @@ class _CategoryPageState extends State<CategoryPage> {
               padding: const EdgeInsets.symmetric(horizontal: 15),
               child: TextButton(
                 onPressed: () {
-                  setState(() async {
-                    showModalBottomSheet(
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      context: context,
-                      builder: (context) {
-                        return Popover(
-                          content: Padding(
-                            padding: const EdgeInsets.fromLTRB(25, 25, 25, 20),
-                            child: Column(
-                              children: [
-                                ListView.separated(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemBuilder: (context, index) {
-                                    final item = sortir[index];
-                                    return InkWell(
-                                      onTap: () {
-                                        setState(() {
-                                          item.isActive = !item.isActive;
-                                        });
-                                      },
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
+                  showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    context: context,
+                    builder: (context) {
+                      return StatefulBuilder(
+                        builder: (context, setState) {
+                          return Popover(
+                            content: Padding(
+                              padding:
+                                  const EdgeInsets.fromLTRB(25, 25, 25, 20),
+                              child: Column(
+                                children: [
+                                  ListView.separated(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, index) {
+                                      final item = sortir[index];
+                                      return InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            setActiveItem(index);
+                                          });
+                                        },
+                                        child: Stack(
+                                          children: [
+                                            Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
                                                 sortir[index].title,
                                                 style: GoogleFonts.dmSans(
                                                   fontSize: 14,
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                               ),
-                                              if (item.isActive)
-                                                SvgPicture.asset(
-                                                    "assets/icons/check.svg"),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                  separatorBuilder: (context, index) =>
-                                      const LineGap(),
-                                  itemCount: sortir.length,
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                            color: navyBlack,
-                                            width: 1,
-                                          ),
-                                          borderRadius: BorderRadius.circular(
-                                            10,
-                                          ),
+                                            ),
+                                            if (item.isActive)
+                                              Align(
+                                                alignment:
+                                                    Alignment.centerRight,
+                                                child: SvgPicture.asset(
+                                                  "assets/icons/check.svg",
+                                                  width: 20,
+                                                ),
+                                              ),
+                                          ],
                                         ),
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 20,
-                                          horizontal: 16,
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            "Reset",
-                                            style: GoogleFonts.dmSans(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400,
+                                      );
+                                    },
+                                    separatorBuilder: (context, index) =>
+                                        const LineGap(),
+                                    itemCount: sortir.length,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
                                               color: navyBlack,
+                                              width: 1,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 20,
+                                            horizontal: 16,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "Reset",
+                                              style: GoogleFonts.dmSans(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w400,
+                                                color: navyBlack,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    const Gap(15),
-                                    Expanded(
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: blueOcean,
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                          vertical: 20,
-                                          horizontal: 16,
-                                        ),
-                                        child: Center(
-                                            child: Text(
-                                          "Apply",
-                                          style: GoogleFonts.dmSans(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w400,
-                                            color: pureWhite,
+                                      const Gap(15),
+                                      Expanded(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: blueOcean,
                                           ),
-                                        )),
+                                          padding: const EdgeInsets.symmetric(
+                                            vertical: 20,
+                                            horizontal: 16,
+                                          ),
+                                          child: Center(
+                                              child: Text(
+                                            "Apply",
+                                            style: GoogleFonts.dmSans(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: pureWhite,
+                                            ),
+                                          )),
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          title: "Sortir",
-                        );
-                      },
-                    );
-                  });
+                            title: "Sortir",
+                          );
+                        },
+                      );
+                    },
+                  );
                 },
                 child: Container(
                   width: double.infinity,

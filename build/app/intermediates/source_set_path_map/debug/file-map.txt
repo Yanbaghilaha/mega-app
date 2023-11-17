@@ -1,0 +1,13 @@
+com.example.e_commerce.app-jetified-window-java-1.0.0-beta04-0 /Users/yanbaghilaha/.gradle/caches/transforms-3/128f7549c3f81d242aa9f589ae0024c0/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.e_commerce.app-core-1.6.0-1 /Users/yanbaghilaha/.gradle/caches/transforms-3/6be47b444a85e07a3d357c809ce146d4/transformed/core-1.6.0/res
+com.example.e_commerce.app-jetified-window-1.0.0-beta04-2 /Users/yanbaghilaha/.gradle/caches/transforms-3/af57bbf1db2f2efb49b62e9468110ecb/transformed/jetified-window-1.0.0-beta04/res
+com.example.e_commerce.app-jetified-annotation-experimental-1.1.0-3 /Users/yanbaghilaha/.gradle/caches/transforms-3/d4596ac79b815af659049f699c8e05bf/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.e_commerce.app-debug-4 /Users/yanbaghilaha/Development/project/e_commerce/android/app/src/debug/res
+com.example.e_commerce.app-main-5 /Users/yanbaghilaha/Development/project/e_commerce/android/app/src/main/res
+com.example.e_commerce.app-pngs-6 /Users/yanbaghilaha/Development/project/e_commerce/build/app/generated/res/pngs/debug
+com.example.e_commerce.app-resValues-7 /Users/yanbaghilaha/Development/project/e_commerce/build/app/generated/res/resValues/debug
+com.example.e_commerce.app-rs-8 /Users/yanbaghilaha/Development/project/e_commerce/build/app/generated/res/rs/debug
+com.example.e_commerce.app-mergeDebugResources-9 /Users/yanbaghilaha/Development/project/e_commerce/build/app/intermediates/incremental/debug/mergeDebugResources/merged.dir
+com.example.e_commerce.app-mergeDebugResources-10 /Users/yanbaghilaha/Development/project/e_commerce/build/app/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+com.example.e_commerce.app-merged_res-11 /Users/yanbaghilaha/Development/project/e_commerce/build/app/intermediates/merged_res/debug
+com.example.e_commerce.app-packaged_res-12 /Users/yanbaghilaha/Development/project/e_commerce/build/path_provider_android/intermediates/packaged_res/debug

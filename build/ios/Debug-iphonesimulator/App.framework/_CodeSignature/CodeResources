@@ -10,11 +10,11 @@
 		</data>
 		<key>flutter_assets/AssetManifest.bin</key>
 		<data>
-		eJPwep4JvddMd0Z2pzIs9Fe4WFU=
+		FgIku+I3izKlcxpXy/djkjbIAIQ=
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		zrbngdTHqxhyvywacbvENg/rZWo=
+		jri36X5C1TgA3v9ixQ/QVd292fg=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -91,6 +91,10 @@
 		<key>flutter_assets/assets/icons/bell.svg</key>
 		<data>
 		YFQyBVHOLBFl/ssmtuxqpAKiIuQ=
+		</data>
+		<key>flutter_assets/assets/icons/check.svg</key>
+		<data>
+		J9UKVHG8cm+/GXjnNpxchVwlWBU=
 		</data>
 		<key>flutter_assets/assets/icons/marker-time.svg</key>
 		<data>
@@ -178,7 +182,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		6Xg9utvEo6iK+ronj6zF/a+vRmk=
+		Wp3dB2qvS0QeHG8clSEaIIuSXuI=
 		</data>
 		<key>flutter_assets/packages/flutter_phosphor_icons/fonts/Phosphor.ttf</key>
 		<data>
@@ -211,14 +215,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			jrfA3HFoNExrjhX2cXJvAmhCY8w81CiSrHlqZUWJZFE=
+			LMZb4KgY3XeEBbwnMKh1xgPHF2gEM2f08IqqCwZKCaY=
 			</data>
 		</dict>
 		<key>flutter_assets/AssetManifest.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			SJ4t8voRNjPmca6J+DA8RjvBXNXBM8ks6HLjO6eLJVs=
+			G2sEiqIa4uGQyiHEFNrzlr6Y4pmn6GnMzdT9FWmyTs4=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -352,6 +356,13 @@
 			<key>hash2</key>
 			<data>
 			HWLQKZEfaSgar86jF6Fh2ZeykNx6ZWi0fEJVmGa7nzk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/icons/check.svg</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			lQmk7EE4qsqXpxGe/MiL6qAXcxRYsgl3+77C8N56780=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/icons/marker-time.svg</key>
@@ -498,7 +509,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			QjIX/3l+rP/Z3aBYLi9GKn/VqIoHUZBe7msxsaXHGSw=
+			VwH33CkFhdyx0/A0bzlaDC1lecJcImF9NVmRbSG9uV0=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/flutter_phosphor_icons/fonts/Phosphor.ttf</key>

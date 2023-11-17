@@ -1,0 +1,4 @@
+#Tue Nov 14 13:30:55 WIB 2023
+base.0=/Users/yanbaghilaha/Development/project/e_commerce/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

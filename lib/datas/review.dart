@@ -56,7 +56,28 @@ List<Review> review = [
       avatar: "avatar-2",
       starCount: 5),
   Review(
-      name: "Peter Parker",
+      name: "T’chala",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      date: randomDate,
+      avatar: "avatar-1",
+      starCount: 2),
+  Review(
+      name: "Tony Stark",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      date: randomDate,
+      avatar: "avatar-1",
+      starCount: 1),
+  Review(
+      name: "Peter Quil",
+      description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      date: randomDate,
+      avatar: "avatar-1",
+      starCount: 5),
+  Review(
+      name: "Wanda Maximof",
       description:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
       date: randomDate,

@@ -7,6 +7,7 @@ import 'package:e_commerce/datas/latest_news.dart';
 import 'package:e_commerce/datas/product.dart';
 import 'package:e_commerce/models/latest_news.dart';
 import 'package:e_commerce/screens/details_page/category_page.dart';
+import 'package:e_commerce/screens/extract/pop_over.dart';
 import 'package:e_commerce/screens/extract/product_tiles.dart';
 import 'package:e_commerce/screens/extract/search_bar.dart';
 import 'package:e_commerce/screens/extract/title_bar.dart';
@@ -188,9 +189,57 @@ class _HomePageState extends State<HomePage> {
             ),
 
             //Categories
-            const Padding(
-              padding: EdgeInsets.fromLTRB(25, 30, 25, 16),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 30, 25, 16),
               child: TitleBar(
+                onTap: () {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (context) {
+                      return Popover(
+                        content: Container(
+                          margin: const EdgeInsets.all(25),
+                          child: Wrap(
+                            runSpacing: 26,
+                            spacing: 38,
+                            children: [
+                              ...categoriesMenu.map((e) {
+                                return Column(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: e.color),
+                                      child: SvgPicture.asset(
+                                          "assets/categories_icons/${e.icon}.svg"),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      e.title,
+                                      style: GoogleFonts.dmSans(
+                                        fontSize: 14,
+                                        letterSpacing: 0.028,
+                                        fontWeight: FontWeight.w400,
+                                        color: navyBlack,
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              }).toList()
+                            ],
+                          ),
+                        ),
+                        title: "All Categories",
+                      );
+                    },
+                  );
+                },
                 title: "Categories",
               ),
             ),
